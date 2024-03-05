@@ -22,17 +22,47 @@ def button_komma(): # Die Funktion funktioniert am ende genauso wie die Funktion
 
 def addieren():
     aktuell = ausgabe_label.get() # Holt die aktuell eingegebene Zahl
-    global ersterRechenwert  # Definiert eine globale Variable, um die erste Nummer zwischen den Funktionen zu speichern
+    global erster_rechenwert  # Definiert eine globale Variable, um die erste Nummer zwischen den Funktionen zu speichern
     global mathe  # Definiert eine globale Variable, um die Art der Operation zu speichern
     mathe = "addieren" # Setzt die Operation auf "addieren". Damit können wir die Operation in einer späterfolgenden Funktion "ergebnis" durchführen
-    ersterRechenwert = float(aktuell) # Speichert denv ersten Wert als Datentyp "Float" zum rechnen
+    erster_rechenwert = float(aktuell) # Speichert denv ersten Wert als Datentyp "Float" zum rechnen
+    ausgabe_label.delete(0, END) # Mit der Anweisung ".delete(0, END)" wird der komplette Inhalte des "entry felds" gelöscht. "0" und "END" beziehen sich auf den Index, beginnend mit 0 und endend mit einem undefinierten Ende
+
+def subtrahieren():
+    aktuell = ausgabe_label.get()
+    global erster_rechenwert
+    global mathe
+    mathe = "subtrahieren"
+    erster_rechenwert = float(aktuell)
+    ausgabe_label.delete(0, END)
+
+def multiplizieren():
+    aktuell = ausgabe_label.get()
+    global erster_rechenwert
+    global mathe
+    mathe = "multiplizieren"
+    erster_rechenwert = float(aktuell)
+    ausgabe_label.delete(0, END)
+
+def dividieren():
+    aktuell = ausgabe_label.get()
+    global erster_rechenwert
+    global mathe
+    mathe = "dividieren"
+    erster_rechenwert = float(aktuell)
     ausgabe_label.delete(0, END)
 
 def ergebnis():
     aktuell = ausgabe_label.get() #Holt sich die aktuell eingebene Zahl und speichert sie in "aktuell"
     ausgabe_label.delete(0, END)  # Löscht das Eingabefeld, um Platz für das Ergebnis zu machen. "0" steht für den beginn des Indexes und "END" für das unbekannnte Ende
     if mathe == "addieren": # Prüft ob die Operation "addieren" durchgeführt werden soll
-        ergebnis = float(aktuell) + ersterRechenwert # Dies ist der Rechenweg und das Ergebnis wird in der Variable "ergebnis" als float gespeichert
+        ergebnis = erster_rechenwert + float(aktuell) # Dies ist der Rechenweg und das Ergebnis wird in der Variable "ergebnis" als float gespeichert
+    elif mathe == "subtrahieren": # Das ist die "if else" Anweisung zum subtrahieren
+        ergebnis = erster_rechenwert - float(aktuell)
+    elif mathe == "multiplizieren": # Das ist die "if else" Anweisung zum multiplizieren
+        ergebnis = erster_rechenwert * float(aktuell)
+    elif mathe == "dividieren": # Das ist die "if else" Anweisung zum dividieren
+        ergebnis = erster_rechenwert / float(aktuell)
     ausgabe_label.insert(0, ergebnis) # Mit insert wird der Wert von "ergebnis" an daas Entry Label "ausgabe_label" übergeben
 
 eingabe_frame = tkinter.LabelFrame(main_window, text="Eingabetasten")
@@ -68,13 +98,13 @@ btn_9.grid(row=0, column=2)
 btn_plus = ttk.Button(eingabe_frame, text="+", command=addieren)
 btn_plus.grid(row=3, column=3)
 
-btn_minus = ttk.Button(eingabe_frame, text="-")
+btn_minus = ttk.Button(eingabe_frame, text="-", command=subtrahieren)
 btn_minus.grid(row=2, column=3)
 
-btn_mal = ttk.Button(eingabe_frame, text="*")
+btn_mal = ttk.Button(eingabe_frame, text="*", command=multiplizieren)
 btn_mal.grid(row=1, column=3)
 
-btn_geteilt = ttk.Button(eingabe_frame, text="/")
+btn_geteilt = ttk.Button(eingabe_frame, text="/", command=dividieren)
 btn_geteilt.grid(row=0, column=3)
 
 btn_ergebnis = ttk.Button(eingabe_frame, text="=", command=ergebnis)
@@ -86,7 +116,7 @@ btn_0.grid(row=3, column=1)
 btn_komma = ttk.Button(eingabe_frame, text=",", command=button_komma)
 btn_komma.grid(row=3, column=2)
 
-btn_clear = ttk.Button(eingabe_frame, text="CLEAR", command=button_clear)
-btn_clear.grid(column=4)
+btn_clear = ttk.Button(main_window, text="CLEAR", command=button_clear)
+btn_clear.grid(row=0, column=1, pady=10, padx=10)
 
 main_window.mainloop()
