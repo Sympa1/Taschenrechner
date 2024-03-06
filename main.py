@@ -3,9 +3,8 @@ from tkinter import ttk, END
 
 main_window = tkinter.Tk()
 
-ausgabe_label = tkinter.Entry(main_window, width=35, borderwidth=1)
-
-ausgabe_label.grid(row=0, column=0, pady=10)
+ausgabe_label = tkinter.Entry(main_window, width=20, borderwidth=1)
+ausgabe_label.grid(row=0, column=0, pady=5, padx=10, sticky="ew")
 
 def button_click(nummer):
     aktuell = ausgabe_label.get()  # Holt den aktuellen Inhalt des Eingabefelds und speichert ihn in einer Variable.
@@ -26,7 +25,7 @@ def addieren():
     global mathe  # Definiert eine globale Variable, um die Art der Operation zu speichern
     mathe = "addieren" # Setzt die Operation auf "addieren". Damit können wir die Operation in einer späterfolgenden Funktion "ergebnis" durchführen
     erster_rechenwert = float(aktuell) # Speichert denv ersten Wert als Datentyp "Float" zum rechnen
-    ausgabe_label.delete(0, END) # Mit der Anweisung ".delete(0, END)" wird der komplette Inhalte des "entry felds" gelöscht. "0" und "END" beziehen sich auf den Index, beginnend mit 0 und endend mit einem undefinierten Ende
+    ausgabe_label.delete(0, END)
 
 def subtrahieren():
     aktuell = ausgabe_label.get()
@@ -66,7 +65,7 @@ def ergebnis():
     ausgabe_label.insert(0, ergebnis) # Mit insert wird der Wert von "ergebnis" an daas Entry Label "ausgabe_label" übergeben
 
 eingabe_frame = tkinter.LabelFrame(main_window, text="Eingabetasten")
-eingabe_frame.grid(row=1, column=0, padx=15, pady=10)
+eingabe_frame.grid(row=1, column=0, padx=15, pady=10, sticky="ew")
 
 btn_1 = ttk.Button(eingabe_frame, text="1", command=lambda: button_click(1)) # "lambda" sind sozusagen wegwerf Variablen. Dies ist notwendig, da wir je nach taste einen anderen Parameter/Wert (nummer) übergebeen.
 btn_1.grid(row=2, column=0)
@@ -117,6 +116,6 @@ btn_komma = ttk.Button(eingabe_frame, text=",", command=button_komma)
 btn_komma.grid(row=3, column=2)
 
 btn_clear = ttk.Button(main_window, text="CLEAR", command=button_clear)
-btn_clear.grid(row=0, column=1, pady=10, padx=10)
+btn_clear.grid(row=0, column=1, pady=5, padx=10)
 
 main_window.mainloop()
