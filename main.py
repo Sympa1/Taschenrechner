@@ -2,6 +2,7 @@ import tkinter
 from tkinter import ttk, END
 
 main_window = tkinter.Tk()
+main_window.title("Taschenrechner")
 
 ausgabe_label = tkinter.Entry(main_window, width=20, borderwidth=1)
 ausgabe_label.grid(row=0, column=0, pady=5, padx=10, sticky="ew")
